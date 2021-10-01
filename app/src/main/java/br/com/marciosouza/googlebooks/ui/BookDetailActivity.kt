@@ -17,7 +17,7 @@ class BookDetailActivity : AppCompatActivity() {
         binding = ActivityBookDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val volume = intent.getParcelableExtra<Volume>(EXTRA_BOOK) //??
+        val volume = intent.getParcelableExtra<Volume>(EXTRA_BOOK)
         if(volume != null){
 
             if(volume.volumeInfo.imageLinks?.smallThumbnail != null) {
@@ -40,7 +40,7 @@ class BookDetailActivity : AppCompatActivity() {
         private const val EXTRA_BOOK = "book"
 
         fun open(context: Context, volume: Volume){
-            val detailIntent = Intent(context, BookDetailActivity::class.java) //??
+            val detailIntent = Intent(context, BookDetailActivity::class.java)
             detailIntent.putExtra(EXTRA_BOOK, volume)
             context.startActivity(detailIntent)
         }

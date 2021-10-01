@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 is BookListViewModel.State.Loaded -> {
                     binding.mainLoading.root.visibility = View.GONE
                     binding.mainRecycleView.adapter =
-                        BookListAdapter(state.items, this@MainActivity, this@MainActivity::openBookDetail)
+                        BookListAdapter(state.items, this@MainActivity::openBookDetail)
                 }
                 is BookListViewModel.State.Error -> {
                     binding.mainLoading.root.visibility = View.GONE

@@ -55,12 +55,11 @@
                     android:layout_margin="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.937"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/item_book_image_book"
-                    app:layout_constraintVertical_bias="0"
+                    app:layout_constraintVertical_bias="0.0"
                     tools:text="Descrição aqui" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.core.widget.NestedScrollView>

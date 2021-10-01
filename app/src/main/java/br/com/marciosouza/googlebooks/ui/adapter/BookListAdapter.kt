@@ -1,51 +1,47 @@
 package br.com.marciosouza.googlebooks.ui.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.marciosouza.googlebooks.R
 import br.com.marciosouza.googlebooks.databinding.ItemBookBinding
 import br.com.marciosouza.googlebooks.model.Volume
+import com.bumptech.glide.Glide
 import com.squareup.picasso.Picasso
 
 class BookListAdapter(
-    val listItens: List<Volume>,
-    private val context: Context, //??
-    private val onItemClick: (Volume) -> Unit
-): RecyclerView.Adapter<BookListAdapter.BookHolder>() {
+    private val volumes : List<Volume>,
+    private val onItemClick : (Volume) -> Unit
+) : RecyclerView.Adapter<BookListAdapter.BookHolder>()
+{
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : BookHolder { //Carregar arquivo de Layout e criar instancia de BookViewHolder e retornar
-        return BookHolder(ItemBookBinding.inflate(LayoutInflater.from(context), parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookHolder {
+        return BookHolder(ItemBookBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: BookHolder, position: Int) {
-        val volume = listItens[position]
+        val volume = volumes[position]
 
-        if(volume.volumeInfo.imageLinks?.smallThumbnail != null) {
-            Picasso.get().load(volume.volumeInfo.imageLinks.smallThumbnail).into(holder.imgCover)
-        } else{
-            holder.imgCover.setImageResource(R.drawable.ic_broken_image)
-        }
+        Glide.with(holder.itemView.context) //??
+            .load(volume.volumeInfo.imageLinks?.smallThumbnail)
+            .error(R.drawable.ic_broken_image)
+            .into(holder.imgCover)
 
-//        Picasso.get().load(volume.volumeInfo.imageLinks?.smallThumbnail).into(holder.imgCover)
-//            ?: holder.imgCover.setImageResource(R.drawable.ic_broken_image)
+        holder.autor.text = volume.volumeInfo.authors.toString()
+        holder.title.text = volume.volumeInfo.title
+        holder.pageCount.text = volume.volumeInfo.pageCount.toString()
 
-        holder.titulos.text = volume.volumeInfo.title
-        holder.autores.text = volume.volumeInfo.authors?.toString() ?: ""
-        holder.paginas.text = volume.volumeInfo.pageCount?.toString() ?: ""
-        holder.itemView.setOnClickListener{
+        holder.itemView.setOnClickListener {
             onItemClick(volume)
         }
     }
 
-    override fun getItemCount(): Int = listItens.size
+    override fun getItemCount() = volumes.size
 
     class BookHolder(binding: ItemBookBinding) : RecyclerView.ViewHolder(binding.root) {
         val imgCover = binding.itemBookImageBook
-        val titulos = binding.itemBookTitulo
-        val autores = binding.itemBookAutores
-        val paginas = binding.itemBookPaginas
+        val title = binding.itemBookTitulo
+        val autor = binding.itemBookAutores
+        val pageCount = binding.itemBookPaginas
     }
 }
-
