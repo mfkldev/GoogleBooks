@@ -1,9 +1,7 @@
 package br.com.marciosouza.googlebooks
 
-import br.com.marciosouza.googlebooks.model.BookHttp
+import br.com.marciosouza.googlebooks.usecase.BookRepository
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -12,8 +10,11 @@ import org.junit.Assert.*
  */
 class ExampleUnitTest {
     @Test
-    fun googleBooksApiTest() {
-        val searchResult = BookHttp.searchBook("Dominando o Android")
+    suspend fun googleBooksApiTest() {
+
+        val bookRepository = BookRepository()
+
+        val searchResult = bookRepository.searchBooks()
         searchResult?.items?.forEach{volume ->
             println(volume)
         }

@@ -1,18 +1,13 @@
 package br.com.marciosouza.googlebooks.ui
 
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import br.com.marciosouza.googlebooks.R
 import br.com.marciosouza.googlebooks.databinding.ActivityMainBinding
-import br.com.marciosouza.googlebooks.databinding.LayoutLoadingBinding
-import br.com.marciosouza.googlebooks.model.Volume
-import br.com.marciosouza.googlebooks.ui.adapter.BookListAdapter
-import br.com.marciosouza.googlebooks.ui.viewmodel.BookListViewModel
+import br.com.marciosouza.googlebooks.ui.adapter.BookPagerAdapter
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,36 +15,28 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private val viewModel: BookListViewModel by lazy {
-        ViewModelProvider(this).get(BookListViewModel::class.java)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.mainRecycleView.layoutManager = LinearLayoutManager(this)
+        binding.mainViewPager.adapter = BookPagerAdapter(this)
 
-        viewModel.state.observe(this, Observer { state ->
-            when (state) {
-                is BookListViewModel.State.Loading -> {
-                    binding.mainLoading.root.visibility = View.VISIBLE
-                }
-                is BookListViewModel.State.Loaded -> {
-                    binding.mainLoading.root.visibility = View.GONE
-                    binding.mainRecycleView.adapter =
-                        BookListAdapter(state.items, this@MainActivity::openBookDetail)
-                }
-                is BookListViewModel.State.Error -> {
-                    binding.mainLoading.root.visibility = View.GONE
-                    Toast.makeText(this@MainActivity, R.string.error_loading_book, Toast.LENGTH_LONG).show()
-                }
-            }
-        })
-        viewModel.loadBooks()
-    }
+        TabLayoutMediator(binding.mainTablayout, binding.mainViewPager) { tab, position -> //??
+            tab.setText(
+                if (position == 0)
+                    R.string.tab_books
+                else
+                    R.string.favorites
+            )
+        }.attach()
 
-    private fun openBookDetail(volume: Volume) {
-        BookDetailActivity.open(this, volume)
+//        TabLayoutMediator(binding.mainTablayout, binding.mainViewPager, TabLayoutMediator.TabConfigurationStrategy({tab, position ->
+//            tab.setText(
+//            if (position == 0)
+//                R.string.tab_books
+//            else
+//                R.string.favorites
+//        ) })).attach()
+//
     }
 }

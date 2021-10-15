@@ -7,29 +7,25 @@ import br.com.marciosouza.googlebooks.R
 import br.com.marciosouza.googlebooks.databinding.ItemBookBinding
 import br.com.marciosouza.googlebooks.model.Volume
 import com.bumptech.glide.Glide
-import com.squareup.picasso.Picasso
 
 class BookListAdapter(
-    private val volumes : List<Volume>,
-    private val onItemClick : (Volume) -> Unit
-) : RecyclerView.Adapter<BookListAdapter.BookHolder>()
-{
+    private val volumes: List<Volume>,
+    private val onItemClick: (Volume) -> Unit
+) : RecyclerView.Adapter<BookListAdapter.BookHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookHolder {
-        return BookHolder(ItemBookBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return BookHolder(
+            ItemBookBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: BookHolder, position: Int) {
         val volume = volumes[position]
-
-        Glide.with(holder.itemView.context) //??
-            .load(volume.volumeInfo.imageLinks?.smallThumbnail)
-            .error(R.drawable.ic_broken_image)
-            .into(holder.imgCover)
-
-        holder.autor.text = volume.volumeInfo.authors.toString()
-        holder.title.text = volume.volumeInfo.title
-        holder.pageCount.text = volume.volumeInfo.pageCount.toString()
+        holder.bindHolder(volume)
 
         holder.itemView.setOnClickListener {
             onItemClick(volume)
@@ -43,5 +39,19 @@ class BookListAdapter(
         val title = binding.itemBookTitulo
         val autor = binding.itemBookAutores
         val pageCount = binding.itemBookPaginas
+
+        fun bindHolder(
+            volume: Volume
+        ) {
+            Glide.with(itemView.context) //??
+                .load(volume.volumeInfo.imageLinks?.smallThumbnail)
+                .error(R.drawable.ic_broken_image)
+                .into(imgCover)
+
+
+            autor.text = volume.volumeInfo.authors.toString()
+            title.text = volume.volumeInfo.title
+            pageCount.text = volume.volumeInfo.pageCount.toString()
+        }
     }
 }

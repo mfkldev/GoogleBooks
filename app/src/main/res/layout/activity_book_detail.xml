@@ -1,65 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-    tools:context=".ui.BookDetailActivity"
-    >
+    android:layout_height="match_parent">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context=".ui.BookDetailActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/item_book_image_book"
-                    android:layout_width="96dp"
-                    android:layout_height="120dp"
-                    android:layout_margin="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@tools:sample/avatars" />
+            <ImageView
+                android:id="@+id/item_book_image_book"
+                android:layout_width="96dp"
+                android:layout_height="120dp"
+                android:layout_margin="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
 
-                <TextView
-                    android:id="@+id/item_book_titulo"
-                    style="@style/Titulo"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/item_book_image_book"
-                    app:layout_constraintTop_toTopOf="@id/item_book_image_book"
-                    tools:text="Título" />
+            <TextView
+                android:id="@+id/item_book_titulo"
+                style="@style/Titulo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/item_book_image_book"
+                app:layout_constraintTop_toTopOf="@id/item_book_image_book"
+                tools:text="Título" />
 
-                <TextView
-                    android:id="@+id/item_book_autores"
-                    style="@style/SubTitulo"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/item_book_image_book"
-                    app:layout_constraintTop_toBottomOf="@id/item_book_titulo"
-                    tools:text="Autores" />
+            <TextView
+                android:id="@+id/item_book_autores"
+                style="@style/SubTitulo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/item_book_image_book"
+                app:layout_constraintTop_toBottomOf="@id/item_book_titulo"
+                tools:text="Autores" />
 
-                <TextView
-                    android:id="@+id/item_book_paginas"
-                    style="@style/SubTitulo"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/item_book_image_book"
-                    app:layout_constraintTop_toBottomOf="@id/item_book_autores"
-                    tools:text="Páginas" />
+            <TextView
+                android:id="@+id/item_book_paginas"
+                style="@style/SubTitulo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/item_book_image_book"
+                app:layout_constraintTop_toBottomOf="@id/item_book_autores"
+                tools:text="Páginas" />
 
-                <TextView
-                    android:id="@+id/item_books_descricao"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.937"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/item_book_image_book"
-                    app:layout_constraintVertical_bias="0.0"
-                    tools:text="Descrição aqui" />
+            <TextView
+                android:id="@+id/item_books_descricao"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.937"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/item_book_image_book"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="Descrição aqui" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabFavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:focusable="true" />
+
+</FrameLayout>

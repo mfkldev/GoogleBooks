@@ -2,4 +2,7 @@
     <string name="app_name">GoogleBooks</string>
     <string name="message_loading">Carregando…</string>
     <string name="error_loading_book">Erro ao tentar carregar a lista de livros</string>
+    <string name="tab_books">Livros</string>
+    <string name="favorites">Favoritos</string>
+    <string name="search_query_hint">Buscar por livro</string>
 </resources>
